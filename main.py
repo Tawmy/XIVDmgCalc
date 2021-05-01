@@ -9,14 +9,45 @@ from enums import Job
 
 
 def main():
-    attributes1 = Attributes(309, 340, 5145, 357, 5173, 3352, 2718, 1220, 309, 5173, 380)
-    character1 = Character(Job.SCH, 80, 174, attributes1)
+    attributes1 = Attributes(strength=309,
+                             dexterity=340,
+                             vitality=5145,
+                             intelligence=357,
+                             mind=5173,
 
-    attributes2 = Attributes(309, 340, 5145, 357, 5173, 3352, 2718, 1220, 309, 5173, 380)
+                             critical_hit_rate=3352,
+                             determination=2718,
+                             direct_hit_rate=1220,
+
+                             attack_power=309,
+
+                             magic_attack_potency=5173,
+
+                             tenacity=380)
+
+    attributes2 = Attributes(strength=309,
+                             dexterity=340,
+                             vitality=5235,
+                             intelligence=357,
+                             mind=5245,
+
+                             critical_hit_rate=3252,
+                             determination=2891,
+                             direct_hit_rate=1220,
+
+                             attack_power=309,
+
+                             magic_attack_potency=5173,
+
+                             tenacity=380)
+
+    character1 = Character(Job.SCH, 80, 174, attributes1)
     character2 = Character(Job.SCH, 80, 174, attributes2)
 
     potency = 290
     attacks = 100000
+
+    # ----------------------------- #
 
     total1 = 0
     total2 = 0
@@ -26,9 +57,11 @@ def main():
         total1 += calc_damage(potency, character1)
         total2 += calc_damage(potency, character2)
         i += 1
-    print(total1 / attacks)
-    print(total2 / attacks)
-    print(f"Second {round(total2 / total1, 4)}x damage of first")
+
+    percentage = round((total2 / total1 - 1) * 100, 2)
+    percentage = percentage if percentage < 0 else f"+{percentage}"
+    print(f"Average 1: {total1 / attacks}")
+    print(f"Average 2: {total2 / attacks} ({percentage}%)")
 
 
 def calc_damage(potency: int, c: Character) -> int:
