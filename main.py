@@ -49,19 +49,24 @@ def main():
 
     # ----------------------------- #
 
-    total1 = 0
-    total2 = 0
-    i = 0
-    print(f"Calculating for {attacks} attacks...")
-    while i < attacks:
-        total1 += calc_damage(potency, character1)
-        total2 += calc_damage(potency, character2)
-        i += 1
+    j = 0
 
-    percentage = round((total2 / total1 - 1) * 100, 2)
-    percentage = percentage if percentage < 0 else f"+{percentage}"
-    print(f"Average 1: {total1 / attacks}")
-    print(f"Average 2: {total2 / attacks} ({percentage}%)")
+    print(f"Calculating for {attacks} attacks...")
+    while j < 5:
+        total1 = 0
+        total2 = 0
+        i = 0
+
+        while i < attacks:
+            total1 += calc_damage(potency, character1)
+            total2 += calc_damage(potency, character2)
+            i += 1
+
+        percentage = round((total2 / total1 - 1) * 100, 2)
+        percentage = percentage if percentage < 0 else f"+{percentage}"
+        print(f"Average 1: {total1 / attacks}")
+        print(f"Average 2: {total2 / attacks} ({percentage}%)")
+        j += 1
 
 
 def calc_damage(potency: int, c: Character) -> int:
